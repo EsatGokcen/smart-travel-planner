@@ -53,4 +53,19 @@ function TravelForm() {
     )
 }
 
-export default TravelForm;
+function handleSubmit () {
+    fetch('http://localhost:3000/api/submit-trip', {
+        method: 'POST',
+        headers: { 'Content-Type' : 'application/json'},
+        body: JSON.stringify({ destination, travelMode, accommodation})
+    })
+    .then(res => res.text())
+    .then(message => alert(message))
+    .catch(err => console.error(err));
+
+    return (
+        <div></div>
+    )
+}
+
+export default TravelForm; handleSubmit;
