@@ -26,6 +26,12 @@ app.get('/api/user-info', (req, res) => {
     res.json(userInfo);
 });
 
+app.post('/api/submit-trip', (req, res) => {
+    console.log(req.body);
+    res.send('Trip submitted successfully!');
+    res.json({message: "Trip submitted successfully!"});
+});
+
 app.listen(3000, () => {
     console.log('Server is running on http://localhost:3000');
 })
