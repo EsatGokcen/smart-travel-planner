@@ -2,7 +2,7 @@ import './travelFrom.css';
 import {useEffect, useState} from 'react';
 
 function TravelForm() {
-    
+
     const [options, setOptions] = useState({destinations:[], travelModes:[], accommodations:[]});
     // const [userInfo, setUserInfo] = useState({name: '', age: '', passport: '', travelHistory: []});
 
@@ -28,6 +28,20 @@ function TravelForm() {
             <option >Select destination</option>
             {options.destinations.map((dest) => (
                 <option key={dest} value={dest}>{dest}</option>
+            ))}
+            </select>
+            <label htmlFor="travelMode">Travel Mode</label>
+            <select id="travelMode">
+            <option >Select Travel Mode</option>
+            {options.travelModes.map((tMode) => (
+                <option key={tMode} value={tMode}>{tMode}</option>
+            ))}
+            </select>
+            <label htmlFor="accommodation">Accommodation</label>
+            <select id="accommodation">
+            <option >Select Accommodation</option>
+            {options.accommodations.map((accom) => (
+                <option key={accom} value={accom}>{accom}</option>
             ))}
             </select>
             
