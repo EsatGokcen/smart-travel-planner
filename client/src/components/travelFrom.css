@@ -1,0 +1,72 @@
+/* Body Styling */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #b1fffe 0%, #31067b 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Form Container */
+.travel-form {
+    width: 100%;
+    max-width: 600px;
+    padding: 40px;
+    background-color: #fff;
+    border-radius: 15px;
+    box-shadow: 0 10px 25px #31067b;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Header */
+.travel-form h1 {
+    margin: 0 0 20px;
+    font-size: 2rem;
+    text-align: center;
+    color: #19033e;
+}
+
+/* Labels */
+.travel-form label {
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: #19033e;
+}
+
+/* Inputs & Select */
+.travel-form input,
+.travel-form select {
+    width: 100%;
+    padding: 12px 15px;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    transition: border-color 0.3s ease;
+}
+
+.travel-form input:focus,
+.travel-form select:focus {
+    border-color: #31067b;
+    outline: none;
+}
+
+/* Button */
+.travel-form button {
+    padding: 15px;
+    font-size: 1rem;
+    background-color: #31067b;
+    color: #fff;
+    border: none;
+    border-radius: 8px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.travel-form button:hover {
+    background-color: #7400b8;
+}
