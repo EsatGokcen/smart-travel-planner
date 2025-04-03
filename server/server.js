@@ -1,8 +1,11 @@
 const express = require('express');
+const cors = require('cors');
 const app = express();
 
+app.use(cors());
+
 const travelOptions = {
-    destionations: ["New York", "Paris", "Tokyo"],
+    destinations: ["Istanbul", "Paris", "Tokyo", "London", "New York"],
     travelModes: ["Car", "Plane", "Train"],
     accommodations: ["Hotel", "Hostel", "Airbnb"],
 }
