@@ -1,42 +1,49 @@
 const express = require('express');
+const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
-const cors = require('cors');
+const cors = require('cors'); // Import the CORS middleware
+const Trip = require('./models/Trip'); // Import Trip model
+
 const app = express();
+const PORT = 3000;
 
+// Connect to MongoDB
+mongoose.connect('mongodb://localhost:27017/travelPlanner')
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error(err));
+
+// Middleware
+app.use(cors()); // Enable CORS for all routes
 app.use(bodyParser.json());
-app.use(cors());
 
-const travelOptions = {
-    destinations: ["Istanbul", "Paris", "Tokyo", "London", "New York"],
-    travelModes: ["Car", "Plane", "Train"],
-    accommodations: ["Hotel", "Hostel", "Airbnb"],
-}
-
-const userInfo = {
-    name: ["Taha Tariq" , "Esat Gokcen", "Varun Kumar"],
-    age: [21, 23, 26],
-    passport: ["123456789", "987654321", "456789123"],
-    travelHistory: [
-        { destination: "New York", date: "2022-01-01" },
-        { destination: "Paris", date: "2022-06-15" },
-        { destination: "Tokyo", date: "2023-03-10" }
-    ]
-}   
-
+// Existing GET route for travel options
 app.get('/api/travel-options', (req, res) => {
-    res.json(travelOptions);
+  const options = {
+    destinations: ["New York", "Paris", "Tokyo"],
+    travelModes: ["Car", "Plane", "Train"],
+    accommodations: ["Hotel", "Hostel", "Airbnb"]
+  };
+  res.json(options);
 });
 
-app.get('/api/user-info', (req, res) => {
-    res.json(userInfo);
-});
-
+// Modify the POST route to save trips to MongoDB
 app.post('/api/submit-trip', (req, res) => {
-    console.log(req.body);
-    res.send('Trip submitted successfully!');
-    res.json({message: "Trip submitted successfully!"});
+  const tripData = req.body;
+  const newTrip = new Trip(tripData);
+  
+  newTrip.save()
+    .then(() => res.send(`Trip planned to ${tripData.destination} by ${tripData.travelMode}`))
+    .catch(err => res.status(500).send('Error saving trip: ' + err.message));
 });
 
-app.listen(3000, () => {
-    console.log('Server is running on http://localhost:3000');
-})
+// New GET route to retrieve all saved trips
+app.get('/api/trips', (req, res) => {
+  Trip.find()
+    .then(trips => res.json(trips))
+    .catch(err => res.status(500).send('Error retrieving trips: ' + err.message));
+});
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
